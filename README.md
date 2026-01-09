@@ -30,7 +30,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 <div align="center">
-  <img src="https://github.com/RomanRes/Object-detection-tool-based-on-Dash-and-YOLOv3/blob/main/img/YOLOv3readme.gif" >
+  <img src="https://github.com/RomanRes/Object-detection-tool/blob/main/img/YOLOv3readme.gif" >
 </div>
 
 An object detection tools. Based on YOLOv3 with pretrained weights on COCO data set. Can detect 80 classes.
@@ -80,6 +80,7 @@ python app.py
 ## Usage
 
 The app allows you to change the maximum value of the IOU between boxes of the same class, as well as the value of the probability of finding an object in a box, to eliminate unnecessary boxes.
+
 
 
 
