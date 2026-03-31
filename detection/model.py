@@ -45,7 +45,7 @@ def darknet_conv(
         name="conv_" + str(idx),
     )(x)
 
-    # BN
+    # BN 
     if batch_norm:
         x = BatchNormalization(
             momentum=0.99, epsilon=0.001, name="batch_norm" + str(idx)
@@ -53,7 +53,7 @@ def darknet_conv(
 
     # LeakyReLU
     if leaky:
-        x = LeakyReLU(negative_slope=0.1, name="leaky" + str(idx))(x)
+        x = LeakyReLU(alpha=0.1, name="leaky" + str(idx))(x)
     return x
 
 

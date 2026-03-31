@@ -1,5 +1,8 @@
-dash_bootstrap_components
-numpy
-matplotlib
-tensorflow
-gunicorn>=20.1.0
+tensorflow-cpu==2.15.0
+
+dash==4.1.0
+dash-bootstrap-components==2.0.4
+
+gunicorn==21.2.0
+matplotlib==3.8.4
+

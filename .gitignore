@@ -1,0 +1,6 @@
+yolov3.weights
+.venv/
+Last/
+*.weights
+.idea/
+desktop.ini
