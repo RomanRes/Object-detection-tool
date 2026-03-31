@@ -291,4 +291,4 @@ def run_detection(n_clicks, contents, class_threshold, nms_thresh):
 # Main
 # ---------------------------
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(host='0.0.0.0', port=8050, debug=False)

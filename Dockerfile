@@ -2,38 +2,35 @@
 FROM python:3.11-slim AS builder
 
 WORKDIR /app
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
 
-RUN apt-get update && apt-get install -y wget
+# virtuelle Umgebung statt --user
+RUN python -m venv /venv
+ENV PATH="/venv/bin:$PATH"
 
-# Install requirements into a local folder
 COPY requirements.txt .
-RUN pip install --upgrade pip && \
-    pip install --no-cache-dir --user -r requirements.txt
 
-# Download weights
-RUN wget https://pjreddie.com/media/files/yolov3.weights -O yolov3.weights
+RUN pip install --no-cache-dir -r requirements.txt
+
+# weights laden
+RUN apt-get update && apt-get install -y wget && \
+    wget https://pjreddie.com/media/files/yolov3.weights -O yolov3.weights && \
+    rm -rf /var/lib/apt/lists/*
 
 # --- STAGE 2: Final Image ---
 FROM python:3.11-slim
 
 WORKDIR /app
-# Copy only the installed packages from the builder
-COPY --from=builder /root/.local /root/.local
+
+# nur saubere venv kopieren
+COPY --from=builder /venv /venv
+ENV PATH="/venv/bin:$PATH"
+
+# weights kopieren
 COPY --from=builder /app/yolov3.weights /app/yolov3.weights
+
+# code
 COPY . .
 
-# Update PATH to find the installed packages
-ENV PATH=/root/.local/bin:$PATH
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-# Install minimal system libs for OpenCV
-RUN apt-get update && apt-get install -y \
-    libgl1 \
-    libglib2.0-0 \
-    && rm -rf /var/lib/apt/lists/*
-
 EXPOSE 8050
+
 CMD ["python", "app.py"]
