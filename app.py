@@ -2,7 +2,7 @@ import os
 import base64
 from typing import Optional, Union, Any
 
-# Third-party imports
+
 import dash
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
@@ -10,13 +10,12 @@ import tensorflow as tf
 from dash import dcc, html, Input, Output, State, callback
 from dash.exceptions import PreventUpdate
 
-# Local module imports (Ensure these files exist in your /utils and /detection folders)
+
 from utils.plot import img_to_plotly_fig
 from utils.loadimage import load_image_pixels
 
-# -----------------------------------------------------------------------------
+
 # TENSORFLOW CONFIGURATION
-# -----------------------------------------------------------------------------
 # Reduce TF logging (0 = all, 1 = no info, 2 = no warnings, 3 = no errors)
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
 
@@ -39,9 +38,8 @@ def setup_tensorflow() -> None:
 setup_tensorflow()
 
 
-# -----------------------------------------------------------------------------
 # PLOTLY FIGURE DEFAULTS
-# -----------------------------------------------------------------------------
+
 def create_default_figure() -> go.Figure:
     """
     Creates an empty placeholder figure to show before any image is uploaded.
@@ -90,9 +88,9 @@ def create_default_figure() -> go.Figure:
     return fig
 
 
-# -----------------------------------------------------------------------------
+
 # DASH APP INITIALIZATION
-# -----------------------------------------------------------------------------
+
 app = dash.Dash(
     __name__,
     external_stylesheets=[dbc.themes.LITERA],
@@ -102,9 +100,9 @@ app = dash.Dash(
 
 app.title = "YOLOv3 Detection Tool"
 
-# -----------------------------------------------------------------------------
-# APP LAYOUT (Flexbox optimized for Full-Screen)
-# -----------------------------------------------------------------------------
+
+# APP LAYOUT
+
 app.layout = html.Div(
     [
         # HEADER SECTION
@@ -224,10 +222,8 @@ app.layout = html.Div(
 )
 
 
-# -----------------------------------------------------------------------------
-# CALLBACKS
-# -----------------------------------------------------------------------------
 
+# CALLBACKS
 
 @app.callback(
     Output("graph_figure", "figure", allow_duplicate=True),
@@ -295,7 +291,7 @@ def run_detection(
 
     image = load_image_pixels(contents)
 
-    # Original logic: Calls img_to_plotly_fig WITH threshold arguments
+
     return img_to_plotly_fig(
         image,
         class_threshold=class_threshold,

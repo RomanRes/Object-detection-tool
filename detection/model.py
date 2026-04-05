@@ -14,8 +14,6 @@ from tensorflow.keras import Model
 from keras.models import load_model
 
 # darknet_conv,  darknet_residual_block, convolutional_set, yolo_end are the helper function to build YOLOv3 network
-
-
 def darknet_conv(
     x,
     filters,

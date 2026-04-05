@@ -3,7 +3,6 @@ FROM python:3.11-slim AS builder
 
 WORKDIR /app
 
-# virtuelle Umgebung statt --user
 RUN python -m venv /venv
 ENV PATH="/venv/bin:$PATH"
 
@@ -21,11 +20,9 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# nur saubere venv kopieren
 COPY --from=builder /venv /venv
 ENV PATH="/venv/bin:$PATH"
 
-# weights kopieren
 COPY --from=builder /app/yolov3.weights /app/yolov3.weights
 
 # code
