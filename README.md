@@ -15,7 +15,7 @@
 
 <br />
 
-This project is an object detection application that features a manual reconstruction of the YOLOv3 logic to demonstrate the underlying mechanics of modern computer vision.
+This project is an object detection application featuring a manual reconstruction of the YOLOv3 logic. It is specifically optimized to run in a lightweight environment using CPU-only processing to ensure maximum accessibility and efficiency.
 
 ## Usage
 
@@ -28,11 +28,47 @@ While many developers use high-level libraries, I have manually implemented the 
 ### What I manually implemented:
 
 *   **Full YOLOv3 Architecture:** I coded the entire 106-layer Darknet-53 backbone and detection heads using the TensorFlow/Keras Functional API. Every Convolutional layer, Residual block, and Skip connection is explicitly defined.
-*   **Detection Algorithms (Post-Processing):** I implemented the mathematical logic to transform raw network tensors into meaningful data:
-    *   **Coordinate Decoding:** Anchor box scaling and Sigmoid activations.
-    *   **Custom NMS (Non-Maximum Suppression):** I wrote the algorithm to filter overlapping detections and select the highest-confidence boxes.
-*   **Dash & Plotly UI:** Developed a professional, responsive dashboard from scratch to allow real-time parameter tuning (Confidence and IoU thresholds).
-*   **Deployment Infrastructure:** Engineered a Docker environment for seamless execution on any platform.
+*   **Detection Algorithms:** Custom implementation of Bounding Box Decoding (Sigmoid activations, anchor box scaling, and coordinate normalization) and Non-Maximum Suppression (NMS).
+*   **Infrastructure Optimization:** To maintain the smallest possible footprint, the application is built using a Multi-Stage Dockerfile and utilizes TensorFlow 2.15 (CPU-only).
+
+---
+
+## Deployment & Optimization
+
+The Docker image was engineered with a focus on size efficiency and deployment speed:
+
+1.  **Multi-Stage Build:** The build process is divided into two stages. The first stage handles the installation of dependencies and the 240MB weights download, while the second stage only contains the necessary runtime environment and the code.
+2.  **CPU Efficiency:** By using the CPU-specific version of TensorFlow 2.15, the image size is significantly reduced compared to GPU-enabled versions, making it easier to share and deploy.
+3.  **Docker Hub Support:** To save build time (which can be significant during the initial weights download), a pre-built image will be available for instant execution.
+
+---
+
+## Installation
+
+### Option 1: Fast Start (Pre-built Image)
+To save time and avoid the local build process, you can pull and run the pre-built image direktly from Docker Hub:
+
+```bash
+# Placeholder for Docker Hub Command
+# docker pull [LINK_TO_DOCKER_HUB_IMAGE]
+# docker run -p 8050:8050 [LINK_TO_DOCKER_HUB_IMAGE]
+```
+
+### Option 2: Docker Compose (Build from Source)
+
+1. **Clone and Enter:**
+   ```bash
+   git clone https://github.com/RomanRes/Object-detection-tool.git
+   cd Object-detection-tool
+   ```
+
+2. **Run:**
+   ```bash
+   docker-compose up --build
+   ```
+
+3. **Explore:**
+   Visit http://localhost:8050
 
 ---
 
@@ -40,28 +76,8 @@ While many developers use high-level libraries, I have manually implemented the 
 
 *   **Architecture:** Manual Keras implementation of Darknet-53.
 *   **Algorithms:** Custom NMS and coordinate transformation logic.
-*   **Data Handling:** Optimized pipeline for image resizing, scaling, and batching.
-*   **Weight Management:** Integration of a standard WeightReader utility to bridge original Darknet .weights files with the Keras model.
-
----
-
-## Quick Start (Docker Compose)
-
-The application can be started instantly using Docker. The environment handles all dependencies and the 240MB weights download automatically.
-
-1.  **Clone and Enter:**
-    ```bash
-    git clone https://github.com/RomanRes/Object-detection-tool.git
-    cd Object-detection-tool
-    ```
-
-2.  **Run:**
-    ```bash
-    docker-compose up --build
-    ```
-
-3.  **Explore:**
-    Visit http://localhost:8050
+*   **Weights:** Automatically integrated YOLOv3 pretrained weights via wget.
+*   **Infrastructure:** Optimized Python 3.11-slim Multi-Stage Docker environment.
 
 ---
 
@@ -70,8 +86,8 @@ The application can be started instantly using Docker. The environment handles a
 Most portfolios rely on simple pre-built model loaders. This project demonstrates the ability to:
 
 1.  **Translate Research into Code:** Turning the original YOLOv3 paper into a functional Keras architecture.
-2.  **Master Complex UI/UX:** Creating an interactive tool for AI parameter testing.
-3.  **Ensure Portability:** Using Docker to guarantee the code runs across different platforms without dependency conflicts.
+2.  **Master Complex UI/UX:** Creating an interactive tool for AI parameter testing using Dash and Plotly.
+3.  **Optimize Infrastructure:** Managing image size and deployment efficiency using modern DevOps practices like Multi-Stage builds and CPU-only optimization.
 
 ---
 
