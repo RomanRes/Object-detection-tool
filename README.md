@@ -155,3 +155,48 @@ Most portfolios rely on `model.load()`. This project proves my ability to:
 ## 📧 Contact
 **Roman** - [GitHub Profile](https://github.com/RomanRes)
 
+
+<br />
+<div align="center">
+  <h3 align="center">Object Detection Tool based on YOLOv3</h3>
+  <p align="center">Manual Implementation in TensorFlow and Keras</p>
+</div>
+
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#technical-implementation">Technical Implementation</a></li>
+    <li><a href="#built-with">Built With</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#credits">Credits</a></li>
+  </ol>
+</details>
+
+## About The Project
+<div align="center">
+  <img src="https://github.com/RomanRes/Object-detection-tool/blob/main/img/YOLOv3readme.gif" alt="Demo">
+</div>
+<br />
+This tool features a manual reconstruction of the YOLOv3 architecture and algorithms. It uses pretrained COCO weights and an interactive Dash dashboard for real-time parameter tuning.
+
+## Technical Implementation
+Unlike projects using high-level wrappers, this project features:
+* **Manual Architecture:** The 106-layer Darknet-53 backbone was built using the Keras Functional API.
+* **Algorithm Engineering:** Custom implementation of Bounding Box Decoding (Sigmoid, Anchors) and Non-Maximum Suppression (NMS).
+* **Data Pipeline:** End-to-end processing from Base64 web-upload to normalized 4D tensors.
+
+## Built With
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge) ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge) ![Docker](https://img.shields.io/badge/docker-0db7ed?style=for-the-badge)
+
+## Installation
+### Option 1: Docker (Recommended)
+1. `git clone https://github.com/RomanRes/Object-detection-tool.git`
+2. `docker-compose up --build`
+3. Access `http://localhost:8050`
+
+## Credits
+* **Theory:** Joseph Redmon (YOLOv3 Paper).
+* **Weight Utility:** `WeightReader` for binary parsing.
+* **Engineering:** Manual implementation and Dash UI by **RomanRes**.
+
