@@ -9,13 +9,15 @@
 
 ## About The Project
 
+This project is an object detection application featuring a manual reconstruction of the YOLOv3 logic. It is specifically optimized to run in a lightweight environment using CPU-only processing to ensure maximum accessibility and efficiency.
+
+
 <div align="center">
   <img src="https://github.com/RomanRes/Object-detection-tool/blob/main/img/YOLOv3readme.gif" alt="YOLOv3 Detection Tool Demo">
 </div>
 
 <br />
 
-This project is an object detection application featuring a manual reconstruction of the YOLOv3 logic. It is specifically optimized to run in a lightweight environment using CPU-only processing to ensure maximum accessibility and efficiency.
 
 ## Usage
 
