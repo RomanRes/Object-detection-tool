@@ -59,7 +59,7 @@ The Docker image was engineered with a focus on size efficiency and deployment s
 
 1. **Clone and Enter:**
    ```bash
-   git clone https://github.com/RomanRes/Object-detection-tool.git
+   git clone https://github.com/RomanRes/Docker-YOLOv3-Vision-Dashboard.git
    cd Object-detection-tool
    ```
 
