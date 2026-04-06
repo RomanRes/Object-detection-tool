@@ -46,13 +46,12 @@ The Docker image was engineered with a focus on size efficiency and deployment s
 ## Installation
 
 ### Option 1: Fast Start (Pre-built Image)
-To save time and avoid the local build process, you can pull and run the pre-built image direktly from Docker Hub:
+1. **To save time and avoid the local build process, you can pull and run the pre-built image direktly from Docker Hub:**
 
-```bash
-# Placeholder for Docker Hub Command
-# docker pull [LINK_TO_DOCKER_HUB_IMAGE]
-# docker run -p 8050:8050 [LINK_TO_DOCKER_HUB_IMAGE]
-```
+
+   ```bash
+   docker run -p 8050:8050 gravitsapapa/object-detection-tool-yolo-app:latest
+   ```
 
 ### Option 2: Docker Compose (Build from Source)
 
