@@ -105,122 +105,105 @@ app.title = "YOLOv3 Detection Tool"
 
 app.layout = html.Div(
     [
-        # HEADER SECTION
-        dbc.Row(
-            dbc.Col(
-                html.H3("YOLOv3 Object Detection Tool", className="text-center py-3"),
-                width=12,
-            ),
-            style={"flex": "0 0 auto"}
+        # Header
+        html.Div(
+            html.H3("YOLOv3 Detection Tool", style={"textAlign": "center"}),
+            style={"flex": "0 0 auto", "padding": "10px"},
         ),
 
-        # MAIN GRAPH SECTION (Flexible height)
-        dbc.Row(
-            [
-                dbc.Col(
-                    dbc.Spinner(
-                        dcc.Graph(
-                            id="graph_figure",
-                            figure=create_default_figure(),
-                            style={
-                                "width": "100%",
-                                "height": "100%",
-                                "minHeight": "0px",
-                            },
-                            responsive=True,
-                            config={'displayModeBar': True}
-                        )
-                    ),
-                    width=12,
-                    style={
-                        "flex": "1",
-                        "minHeight": 0,
-                        "display": "flex",
-                        "flexDirection": "column",
-                    },
-                )
-            ],
+        # Graph (nimmt ALLES was übrig bleibt)
+        html.Div(
+            dcc.Graph(
+                id="graph_figure",
+                figure=create_default_figure(),
+                style={
+                    "width": "100%",
+                    "height": "100%",
+                },
+                config={"responsive": True},
+            ),
             style={
                 "flex": "1",
-                "minHeight": 0,
+                "minHeight": "0",
                 "display": "flex",
             },
         ),
 
-        # CONTROLS SECTION
-        dbc.Row(
-            [
-                dbc.Col(
-                    [
-                        html.Label("IoU Threshold (NMS)", className="fw-bold"),
-                        dcc.Slider(
-                            id="nms_thresh",
-                            min=0, max=1, step=0.05,
-                            marks={i / 10: str(i / 10) for i in range(11)},
-                            value=0.5,
-                        ),
-                    ],
-                    width=12, md=4,
-                ),
-
-                dbc.Col(
-                    [
-                        html.Label("Confidence Threshold", className="fw-bold"),
-                        dcc.Slider(
-                            id="class_threshold",
-                            min=0, max=1, step=0.05,
-                            marks={i / 10: str(i / 10) for i in range(11)},
-                            value=0.5,
-                        ),
-                    ],
-                    width=12, md=4,
-                ),
-
-                dbc.Col(
-                    dbc.Button(
-                        "Start Detection",
-                        id="submit_button",
-                        n_clicks=0,
-                        color="primary",
-                        className="w-100 h-100",
+        # Controls
+        html.Div(
+            dbc.Row(
+                [
+                    dbc.Col(
+                        [
+                            html.H6("IoU Threshold (NMS)", className="text-center"),
+                            dcc.Slider(
+                                id="nms_thresh",
+                                min=0,
+                                max=1,
+                                step=0.1,
+                                marks={i / 10: str(i / 10) for i in range(11)},
+                                value=0.5,
+                            ),
+                        ],
+                        md=4,
                     ),
-                    width=12, md=4, className="d-flex align-items-center"
-                ),
-            ],
-            className="p-3 shadow-sm border-top bg-light",
-            style={"flex": "0 0 auto", "zIndex": 10},
+
+                    dbc.Col(
+                        [
+                            html.H6("Confidence Threshold", className="text-center"),
+                            dcc.Slider(
+                                id="class_threshold",
+                                min=0,
+                                max=1,
+                                step=0.1,
+                                marks={i / 10: str(i / 10) for i in range(11)},
+                                value=0.5,
+                            ),
+                        ],
+                        md=4,
+                    ),
+
+                    dbc.Col(
+                        dbc.Button(
+                            "Start detection",
+                            id="submit_button",
+                            n_clicks=0,
+                            color="primary",
+                            className="w-100",
+                        ),
+                        md=4,
+                    ),
+                ]
+            ),
+            style={"flex": "0 0 auto", "padding": "10px"},
         ),
 
-        # UPLOAD SECTION
-        dbc.Row(
-            [
-                dbc.Col(
-                    dcc.Upload(
-                        id="upload-data",
-                        children=html.Div([
-                            "Drag and Drop or Select an Image"
-                        ]),
-                        style={
-                            "width": "100%", "height": "50px", "lineHeight": "50px",
-                            "borderWidth": "1px", "borderStyle": "dashed",
-                            "borderRadius": "5px", "textAlign": "center",
-                        },
-                        multiple=False,
-                    ),
-                    width=12,
-                )
-            ],
+        # Upload
+        html.Div(
+            dcc.Upload(
+                id="upload-data",
+                children="Drag and drop a file or click to upload",
+                style={
+                    "width": "100%",
+                    "height": "60px",
+                    "lineHeight": "60px",
+                    "borderWidth": "1px",
+                    "borderStyle": "dashed",
+                    "borderRadius": "5px",
+                    "textAlign": "center",
+                },
+                multiple=False,
+            ),
             style={"flex": "0 0 auto", "padding": "10px"},
         ),
     ],
     style={
-        "height": "100vh",  # Fixed viewport height
+        "height": "100vh",
         "display": "flex",
         "flexDirection": "column",
-        "overflow": "hidden",  # Prevent double scrolling
-    }
+        "overflow": "hidden",
+    },
 )
-
 
 
 # CALLBACKS
